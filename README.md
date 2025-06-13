@@ -16,8 +16,8 @@ An AI-powered **Eye Disease Detection** web application that allows users to **u
 
 <table>
   <tr>
-    <td><img src="1.png" alt="Healthy Eye" width="200"/></td>
-    <td><img src="2.png" alt="Diseased Eye" width="200"/></td>
+    <td><img src="1.png" alt="Healthy Eye" width="500"/></td>
+    <td><img src="2.png" alt="Diseased Eye" width="500"/></td>
   </tr>
   <tr>
     <td align="center">!st interface</td>
