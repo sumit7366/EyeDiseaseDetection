@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="[https://github.com/sumit7366/EyeDiseaseDetection/assets/your-image-id/ai-eye-scan.gif](https://i.pinimg.com/originals/c2/06/78/c206785ff56f942f2a48ca427b81d7f4.gif)" alt="AI Eye Scan Animation" width="500"/>
+</p>
+
+
 # 👁️ Eye Disease Detection
 
 An AI-powered **Eye Disease Detection** web application that allows users to **upload eye images** and predicts whether an eye disease is present.
@@ -76,4 +81,4 @@ The app will start on **http://127.0.0.1:5000/**.
 
 ### 🌟 **Star this Repo if you found it useful!** ⭐
 # Eye-Disease-Detection
-# Eye-Disease-Detection
+
