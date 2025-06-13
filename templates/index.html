@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Eye Disease Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* General Layout */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            background: none;
+        }
+
+        body {
+            min-height: 100vh;
+            justify-content: flex-start;
+            padding: 20px;
+            background: none;
+            position: relative;
+            flex-grow: 1;
+        }
+
+        /* Background Image with Blur */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://images.pexels.com/photos/801867/pexels-photo-801867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center / cover;
+            filter: blur(8px) brightness(50%);
+            z-index: -1;
+        }
+
+        /* Header Title */
+        .header {
+            position: fixed;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+            animation: fadeInSmooth 1.2s ease-in-out;
+            z-index: 10;
+            text-align: center;
+        }
+
+        @keyframes fadeInSmooth {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        /* Main content container for pushing footer down */
+        main {
+            margin-top: 140px;
+            /* enough space for fixed header */
+            flex-grow: 1;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Form Styling */
+        form {
+            background: rgba(255, 255, 255, 0.18);
+            padding: 25px;
+            border-radius: 14px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        form:hover {
+            transform: scale(1.05);
+        }
+
+        /* Custom File Upload */
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Hide native input */
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        /* Custom label as button */
+        .file-upload label {
+            background: linear-gradient(135deg, #ff6f61, #d43f00);
+            color: white;
+            padding: 14px 22px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+            user-select: none;
+            width: fit-content;
+        }
+
+        .file-upload label:hover {
+            background: linear-gradient(135deg, #e64a41, #a83200);
+            transform: scale(1.1);
+        }
+
+        /* Filename display */
+        #file-name {
+            font-size: 16px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 14px;
+            border-radius: 6px;
+            max-width: 80%;
+            word-wrap: break-word;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+            user-select: none;
+        }
+
+        /* Submit Button */
+        button {
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+            width: fit-content;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0057e1, #009fdd);
+            transform: scale(1.1);
+        }
+
+        /* Footer - always at bottom */
+        footer {
+            text-align: center;
+            padding: 20px 10px;
+            font-family: Arial, sans-serif;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            flex-shrink: 0;
+            color: #ddd;
+            user-select: none;
+        }
+
+        .social-icons {
+            margin: 10px 0;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 26px;
+            color: #ddd;
+            text-decoration: none;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.3);
+        }
+
+        .linkedin:hover {
+            color: #0073b1;
+        }
+
+        .github:hover {
+            color: #333;
+            filter: brightness(1.2);
+        }
+
+        .instagram:hover {
+            color: #C13584;
+        }
+
+        .twitter:hover {
+            color: #1DA1F2;
+        }
+
+        .facebook:hover {
+            color: #3b5998;
+        }
+
+        .copyright {
+            font-size: 14px;
+            margin-top: 8px;
+            color: #bbb;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .header {
+                font-size: 28px;
+                padding: 12px 20px;
+            }
+
+            form {
+                width: 95%;
+            }
+
+            .file-upload label,
+            button {
+                font-size: 16px;
+                padding: 12px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">Eye Disease Detection</div>
+
+    <main>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="file-upload">
+                <label for="file">Choose Image</label>
+                <input type="file" name="file" id="file" accept="image/*" required onchange="displayFileName()" />
+                <span id="file-name">No file chosen</span>
+            </div>
+            <button type="submit">Upload &amp; Predict</button>
+        </form>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/sumit7366" target="_blank" class="linkedin"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/sumit7366" target="_blank" class="github"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/9._sumit" target="_blank" class="instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Eye Disease Detection. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById("file");
+            const fileName = document.getElementById("file-name");
+            fileName.textContent =
+                fileInput.files.length > 0 ? fileInput.files[0].name : "No file chosen";
+        }
+    </script>
+</body>
+
+</html>
