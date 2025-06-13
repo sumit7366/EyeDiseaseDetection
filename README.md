@@ -2,8 +2,10 @@
 
 
 
-
-An AI-powered **Eye Disease Detection** web application that allows users to **upload eye images** and predicts whether an eye disease is present.
+<p align="center">
+  <b>AI-powered web app that analyzes uploaded eye images and detects potential diseases</b><br>
+  <i>Built with Flask · TensorFlow · HTML/CSS · Responsive UI</i>
+</p>
 
 ---
 
